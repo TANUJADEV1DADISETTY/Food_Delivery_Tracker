@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Delivery Live Order Tracker | Apache Kafka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background-glob glow-1"></div>
+  <div class="background-glob glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+        </div>
+        <div>
+          <h1>Kafka Food Tracker</h1>
+          <p class="subtitle">Real-Time Event-Driven Order Lifecycle Monitor</p>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <span class="pulse-dot" id="connectionDot"></span>
+        <span id="connectionText">Connecting to API...</span>
+      </div>
+    </header>
+
+    <!-- Summary Stats Bar -->
+    <section class="stats-bar">
+      <div class="stat-card">
+        <span class="stat-value" id="activeOrdersCount">0</span>
+        <span class="stat-label">Active Orders</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="placedCount">0</span>
+        <span class="stat-label">Placed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="preparingCount">0</span>
+        <span class="stat-label">In Kitchen</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="deliveryCount">0</span>
+        <span class="stat-label">On the Way</span>
+      </div>
+      <div class="stat-card accent">
+        <span class="stat-value" id="totalProcessedCount">0</span>
+        <span class="stat-label">Completed Orders</span>
+      </div>
+    </section>
+
+    <!-- Main Orders Container -->
+    <main class="main-content">
+      <div class="section-title-wrapper">
+        <h2>Live Active Orders</h2>
+        <span class="polling-badge">Polling GET /state every 2s</span>
+      </div>
+
+      <div id="noOrdersState" class="empty-state">
+        <div class="empty-icon">🍔</div>
+        <h3>No Active Orders</h3>
+        <p>Run the producer script (<code>python producer.py --orders 5</code>) to generate live Kafka events.</p>
+      </div>
+
+      <div id="ordersGrid" class="orders-grid">
+        <!-- Order cards inserted dynamically -->
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Powered by <strong>Apache Kafka</strong> &bull; Consumer Group: <code>status-tracker</code> &bull; Topic: <code>order-events</code></p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
